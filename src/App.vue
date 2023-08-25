@@ -94,7 +94,8 @@ const registerWebPush = async () => {
 // }
 
 const sendMessage = () => {
-  fetch('http://localhost:3000/subscribe', {
+  // Send to 'send-message' netlify function
+  fetch('/.netlify/functions/send-message', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
