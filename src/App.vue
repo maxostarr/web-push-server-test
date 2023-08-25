@@ -116,7 +116,7 @@ onBeforeUnmount(() => {
   navigator.serviceWorker.removeEventListener('message', () => {});
 })
 
-registerWebPush();
+// registerWebPush();
 
 </script>
 
