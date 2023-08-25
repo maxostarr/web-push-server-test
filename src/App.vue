@@ -40,38 +40,38 @@ const registerWebPush = async () => {
 // const sendPush = async () => {
   const payload = JSON.stringify({
     title: 'Push Notification',
-    // body: 'This is a push notification',
-    // icon: 'https://vuejs.org/images/logo.png',
-    // image: 'https://vuejs.org/images/logo.png',
-    // badge: 'https://vuejs.org/images/logo.png',
-    // vibrate: [200, 100, 200, 100, 200, 100, 200],
-    // tag: 'vibration-sample',
-    // actions: [
-    //   {
-    //     action: 'coffee-action',
-    //     title: 'Coffee',
-    //     icon: 'https://vuejs.org/images/logo.png',
-    //   },
-    //   {
-    //     action: 'doughnut-action',
-    //     title: 'Doughnut',
-    //     icon: 'https://vuejs.org/images/logo.png',
-    //   },
-    //   {
-    //     action: 'gramophone-action',
-    //     title: 'gramophone',
-    //     icon: 'https://vuejs.org/images/logo.png',
-    //   },
-    //   {
-    //     action: 'atom-action',
-    //     title: 'Atom',
-    //     icon: 'https://vuejs.org/images/logo.png',
-    //   },
-    // ],
-    // data: {
-    //   dateOfArrival: Date.now(),
-    //   primaryKey: 1,
-    // },
+    body: 'This is a push notification',
+    icon: 'https://vuejs.org/images/logo.png',
+    image: 'https://vuejs.org/images/logo.png',
+    badge: 'https://vuejs.org/images/logo.png',
+    vibrate: [200, 100, 200, 100, 200, 100, 200],
+    tag: 'vibration-sample',
+    actions: [
+      {
+        action: 'coffee-action',
+        title: 'Coffee',
+        icon: 'https://vuejs.org/images/logo.png',
+      },
+      {
+        action: 'doughnut-action',
+        title: 'Doughnut',
+        icon: 'https://vuejs.org/images/logo.png',
+      },
+      {
+        action: 'gramophone-action',
+        title: 'gramophone',
+        icon: 'https://vuejs.org/images/logo.png',
+      },
+      {
+        action: 'atom-action',
+        title: 'Atom',
+        icon: 'https://vuejs.org/images/logo.png',
+      },
+    ],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1,
+    },
   });
 
 //   const options = {
@@ -92,6 +92,19 @@ const registerWebPush = async () => {
 
 //   console.log(result);
 // }
+
+const sendMessage = () => {
+  fetch('http://localhost:3000/subscribe', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      registration: registration.value,
+      payload,
+    }),
+  });
+}
 
 navigator.serviceWorker.addEventListener('message', (event) => {
   if (event.data.type === 'registerWebPush') {
@@ -130,6 +143,10 @@ registerWebPush();
       <pre>
         npx web-push send-notification --endpoint={{ registration.endpoint }} --key={{ registration.keys.p256dh }} --auth={{ registration.keys.auth }} --payload='{{ payload }}' --vapid-subject={{ VAPID_SUBJECT }} --vapid-pubkey={{ VAPID_PUBLIC_KEY }} --vapid-pvtkey={{ VAPID_PRIVATE_KEY }}
       </pre>
+
+      <button 
+        @click="sendMessage()"
+      >Send Message</button>
     </div>
 
 
