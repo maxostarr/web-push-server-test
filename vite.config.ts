@@ -17,6 +17,21 @@ export default defineConfig({
       injectManifest: {
         injectionPoint: undefined
       },
+
+      manifest: {
+        name: 'Vite PWA',
+        short_name: 'Vite PWA',
+        theme_color: '#ffffff',
+        description: 'A Vite PWA project',
+        icons: [
+          {
+            src: '/logo.png',
+            sizes: '262x227',
+            type: 'image/png'
+          }
+        ]
+      },
+
       devOptions: {
         enabled: true
       }
