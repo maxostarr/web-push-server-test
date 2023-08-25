@@ -40,38 +40,38 @@ const registerWebPush = async () => {
 // const sendPush = async () => {
   const payload = JSON.stringify({
     title: 'Push Notification',
-    body: 'This is a push notification',
-    icon: 'https://vuejs.org/images/logo.png',
-    image: 'https://vuejs.org/images/logo.png',
-    badge: 'https://vuejs.org/images/logo.png',
-    vibrate: [200, 100, 200, 100, 200, 100, 200],
-    tag: 'vibration-sample',
-    actions: [
-      {
-        action: 'coffee-action',
-        title: 'Coffee',
-        icon: 'https://vuejs.org/images/logo.png',
-      },
-      {
-        action: 'doughnut-action',
-        title: 'Doughnut',
-        icon: 'https://vuejs.org/images/logo.png',
-      },
-      {
-        action: 'gramophone-action',
-        title: 'gramophone',
-        icon: 'https://vuejs.org/images/logo.png',
-      },
-      {
-        action: 'atom-action',
-        title: 'Atom',
-        icon: 'https://vuejs.org/images/logo.png',
-      },
-    ],
-    data: {
-      dateOfArrival: Date.now(),
-      primaryKey: 1,
-    },
+    // body: 'This is a push notification',
+    // icon: 'https://vuejs.org/images/logo.png',
+    // image: 'https://vuejs.org/images/logo.png',
+    // badge: 'https://vuejs.org/images/logo.png',
+    // vibrate: [200, 100, 200, 100, 200, 100, 200],
+    // tag: 'vibration-sample',
+    // actions: [
+    //   {
+    //     action: 'coffee-action',
+    //     title: 'Coffee',
+    //     icon: 'https://vuejs.org/images/logo.png',
+    //   },
+    //   {
+    //     action: 'doughnut-action',
+    //     title: 'Doughnut',
+    //     icon: 'https://vuejs.org/images/logo.png',
+    //   },
+    //   {
+    //     action: 'gramophone-action',
+    //     title: 'gramophone',
+    //     icon: 'https://vuejs.org/images/logo.png',
+    //   },
+    //   {
+    //     action: 'atom-action',
+    //     title: 'Atom',
+    //     icon: 'https://vuejs.org/images/logo.png',
+    //   },
+    // ],
+    // data: {
+    //   dateOfArrival: Date.now(),
+    //   primaryKey: 1,
+    // },
   });
 
 //   const options = {
