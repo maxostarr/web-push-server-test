@@ -1,5 +1,7 @@
 import { client } from './redis'
-export const handler = async (event: any) => {
+import { Handler } from '@netlify/functions'
+
+export const handler: Handler = async () => {
   // Get all connected clients
   // All client keys start with 'client:'
   const clientIds = await new Promise((resolve, reject) => {
