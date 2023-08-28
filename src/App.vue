@@ -101,7 +101,7 @@ const sendMessage = () => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      registration: registration.value,
+      subscription: registration.value,
       payload,
     }),
   });
