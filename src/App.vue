@@ -5,13 +5,27 @@ import {VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT} from "./config"
 // let registration: ServiceWorkerRegistration | null = null;
 // Vue reactive object to store the registration
 let registration = ref<ServiceWorkerRegistration | null>(null);
+let status = ref<string>('');
 
 const getNotificationPermission = async () => {
+
+  status.value = 'Checking Notification permission...';
+
   if (Notification.permission === 'granted') {
+    status.value = 'Notification permission granted';
     return;
   }
 
+  if (Notification.permission === 'denied') {
+    status.value = 'Notification permission denied';
+    return;
+  }
+
+  status.value = 'Requesting Notification permission...';
+
   const permission = await Notification.requestPermission();
+
+  status.value = `Notification permission: ${permission}`;
 
   if (permission !== 'granted') {
     throw new Error('Permission not granted for Notification');
@@ -22,7 +36,9 @@ const registerWebPush = async () => {
 
   await getNotificationPermission();
 
+  status.value = 'Checking for service worker...';
   if (!navigator.serviceWorker.controller) {
+    status.value = 'No service worker found';
     return;
   }
 
@@ -31,13 +47,14 @@ const registerWebPush = async () => {
     applicationServerKey: VAPID_PUBLIC_KEY,
   }
 
+  status.value = 'Registering push...';
+
   navigator.serviceWorker.controller.postMessage({
     type: 'registerWebPush',
     options,
   });  
 }
 
-// const sendPush = async () => {
   const payload = JSON.stringify({
     title: 'Push Notification',
     // body: 'This is a push notification',
@@ -74,24 +91,6 @@ const registerWebPush = async () => {
     // },
   });
 
-//   const options = {
-//     TTL: 60,
-//   };
-
-//   const subscription = registration.value;
-
-//   if (!subscription) {
-//     return;
-//   }
-
-//   const result = await webpush.sendNotification(
-//     subscription,
-//     payload,
-//     options
-//   );
-
-//   console.log(result);
-// }
 
 const sendMessage = () => {
   // Send to 'send-message' netlify function
@@ -108,7 +107,9 @@ const sendMessage = () => {
 }
 
 navigator.serviceWorker.addEventListener('message', (event) => {
+  status.value = 'Message received'
   if (event.data.type === 'registerWebPush') {
+    status.value = 'Web Push registered'
     registration.value = JSON.parse(event.data.payload);
   }
 });
@@ -129,6 +130,8 @@ onBeforeUnmount(() => {
   <main>
 
     <h1>Web Push Notifications</h1>
+
+    <p>{{ status }}</p>
 
     <div v-if="registration">
       <h2>Registration:</h2>
