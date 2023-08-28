@@ -218,11 +218,13 @@ onBeforeUnmount(() => {
     <ul>
       <li v-for="client in clients" :key="client" 
         @click="selectedClient = client"
-        :style="{ 'background-color': selectedClient === client ? 'red' : 'white' }"
+        :style="{ 'color': selectedClient === client ? 'red' : 'white' }"
       >
         {{ client }}
       </li>
     </ul>
+
+    <button @click="sendMessageToClient()">Send Message</button>
   </main>
 </template>
 
