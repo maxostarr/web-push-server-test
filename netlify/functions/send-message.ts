@@ -1,15 +1,14 @@
 import webpush from 'web-push'
 import { Handler } from '@netlify/functions'
-import { VAPID_PRIVATE_KEY, VAPID_PUBLIC_KEY, VAPID_SUBJECT } from "./config"
-
+import { VAPID_PRIVATE_KEY, VAPID_PUBLIC_KEY, VAPID_SUBJECT } from './config'
 
 export const handler: Handler = async (event, context) => {
   if (!event.body) {
     return {
       statusCode: 400,
       body: JSON.stringify({
-        message: 'No body provided',
-      }),
+        message: 'No body provided'
+      })
     }
   }
 
@@ -19,14 +18,13 @@ export const handler: Handler = async (event, context) => {
     return {
       statusCode: 400,
       body: JSON.stringify({
-        message: 'No subscription provided',
-      }),
+        message: 'No subscription provided'
+      })
     }
   }
 
   const { subscription } = parsedBody
-  const { payload=JSON.stringify({title: 'Unset payload'}) } = parsedBody
-
+  const { payload = JSON.stringify({ title: 'Unset payload' }) } = parsedBody
 
   webpush.setVapidDetails(VAPID_SUBJECT, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY)
 
@@ -35,7 +33,7 @@ export const handler: Handler = async (event, context) => {
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: `Sent!`,
-    }),
+      message: `Sent!`
+    })
   }
 }
