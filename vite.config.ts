@@ -17,7 +17,13 @@ export default defineConfig({
       injectManifest: {
         injectionPoint: undefined
       },
-
+      includeAssets: [
+        'favicon.ico',
+        'maskable-icon-512x512.png',
+        'pwa-64x64.png',
+        'pwa-192x192.png',
+        'pwa-512x512.png'
+      ],
       manifest: {
         name: 'Vite PWA',
         short_name: 'Vite PWA',
